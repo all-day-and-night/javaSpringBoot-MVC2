@@ -29,8 +29,8 @@ public class MappingController {
     @GetMapping PathVariable(경로변수 사용)
      */
     @GetMapping("/mapping/{userId}")
-    public String mappingPath(@PathVariable String data){
-        log.info("mappingPati userId={}", data);
+    public String mappingPath(@PathVariable("userId") String data){
+        log.info("mappingPath userId={}", data);
         return "ok";
     }
     /*
@@ -42,8 +42,13 @@ public class MappingController {
         return "ok";
     }
 
-    /*
-    특정 파라미터 조건 매핑
+    /**
+     * 파라미터로 추가 매핑
+     * params="mode",
+     * params="!mode"
+     * params="mode=debug"
+     * params="mode!=debug" (! = )
+     * params = {"mode=debug","data=good"}
      */
 
     @GetMapping(value="/mapping-param", params="mode=debug")
