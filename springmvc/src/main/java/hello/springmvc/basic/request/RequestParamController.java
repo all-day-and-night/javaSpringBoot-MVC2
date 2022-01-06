@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -70,12 +71,45 @@ public class RequestParamController {
         return "ok";
     }
 
+    /**
+     *
+     * @param username
+     * @param age
+     * @return
+     *
+     * int는 변수형이고 Integer는 java의 객체이다
+     * 따라서 null 값이 들어갈 경우 Integer의 형태로 받아야 한다
+     * RequestParam에는 defaultValue가 있으므로 사용하는 것이 용이이
+    */
+
+
     @ResponseBody
     @RequestMapping("/request-param-required")
     public String requestParamRequired(
             @RequestParam(required=true) String username,
-            @RequestParam(required = true) Integer age){
+            @RequestParam(required=true) Integer age){
         log.info("username={}, age={}", username, age);
         return "ok";
     }
+
+    @ResponseBody
+    @RequestMapping("/request-param-defalut")
+    public String requestParamDefault(
+            @RequestParam(required=true, defaultValue = "guest") String username,
+            @RequestParam(required=false, defaultValue = "-1") int age){
+        log.info("username={}, age={}", username, age);
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/request-param-map")
+    public String requestParamMap(
+            @RequestParam Map<String, Object> paramMap){
+        log.info("username={}, age={}", paramMap.get("username"), paramMap.get("age"));
+        return "ok";
+    }
+    /**
+     * 파라미터의 값이 1개가 확실하다면 Map을 사용해도 되지만
+     * 그렇지 않다면 MultiValueMap을 사용하자
+     */
 }
