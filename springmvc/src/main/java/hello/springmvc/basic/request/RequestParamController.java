@@ -1,8 +1,10 @@
 package hello.springmvc.basic.request;
 
 
+import hello.springmvc.basic.HelloData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -93,7 +95,7 @@ public class RequestParamController {
     }
 
     @ResponseBody
-    @RequestMapping("/request-param-defalut")
+    @RequestMapping("/request-param-default")
     public String requestParamDefault(
             @RequestParam(required=true, defaultValue = "guest") String username,
             @RequestParam(required=false, defaultValue = "-1") int age){
@@ -112,4 +114,28 @@ public class RequestParamController {
      * 파라미터의 값이 1개가 확실하다면 Map을 사용해도 되지만
      * 그렇지 않다면 MultiValueMap을 사용하자
      */
+
+    @ResponseBody
+    @RequestMapping("/model-attribute-v1")
+    public String modelAttributeV1(@ModelAttribute HelloData helloData){
+        log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
+        return "ok";
+    }
+
+    /**
+     * @ModelAttribute는 생략이 가능하지만 혼란이 생길 수 있다.
+     *
+     * 규칙 ->
+     * 1. String, int, Integer 같은 단순 타입은 @RequestParam 사용
+     * 2. 나머지는 = @ModelAttribute
+     *
+     * @param helloData
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/model-attribute-v2")
+    public String modelAttributeV2(HelloData helloData){
+        log.info("usernam={}, age={}", helloData.getUsername(), helloData.getAge());
+        return "ok";
+    }
 }
