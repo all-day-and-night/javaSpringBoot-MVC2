@@ -37,3 +37,24 @@
 > GET, HEAD, POST, PUT, PATCH, DELETE 모두 허용
 
 
+
+### HTTP mapping
+
+* @RequestMapping(value = "path", method=RequestMothod.GET)
+  
+  - path 호출이 오면 이 메서드가 실행되도록 매핑 
+  - 대부분의 속성을 배열로 제공하므로 다중 설정이 가능 
+  - ex) {"/hello-basic", "/hello-go"}
+  - http 메서드를 지정하지 않으면 메서드와 무관하게 모든 메서드가 호출 가능하다
+
+* @GetMapping("/mapping")
+
+  - HTTP 메서드를 축약한 애노테이션
+  - 더욱 직관적으로 코드를 알아볼 수 있다.
+  - @RequestMapping + get
+  - @GetMapping("mapping/{userId}") 등으로 리소스 경로에 식별자 주입 가능
+  - 인자로 받을 때는 @PathVariable("userId") 사용
+
+
+
+
