@@ -4,8 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ItemRepository {
+    /**
+     * 한 번에 여러 스레드가 접근할 경우 HashMap이 아니라 ConcurrentHashMap 사용
+     */
+
     private static final Map<Long, Item> store = new HashMap<>();
     private static long sequence = 0L;
 
