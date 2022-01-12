@@ -1,11 +1,14 @@
 package hello.itemservice.domain.item;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Repository
 public class ItemRepository {
     /**
      * 한 번에 여러 스레드가 접근할 경우 HashMap이 아니라 ConcurrentHashMap 사용
